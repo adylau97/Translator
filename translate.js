@@ -1,27 +1,25 @@
-/* initialise variables */
+//Request'GET' to get API results
 var request = new XMLHttpRequest();
+
+//Initialize variables  to link with html elements by id or class
 var input = document.querySelector('.new-translate input');
 var container = document.querySelector('.translate-container');
 var lang = document.querySelector('#lang');
 var langto = document.querySelector('#langto');
-
 var translateBtn = document.querySelector('.translate');
 var clearBtn = document.querySelector('.clear');
 
-/*  add event listeners to buttons */
-
+//Add event listeners to buttons
 translateBtn.addEventListener('click', translate);
 clearBtn.addEventListener('click', clearAll);
 
-/* generic error handler */
+//Generic error handler
 function onError(error) {
   console.log(error);
 }
 
-/* display previously-saved stored notes on startup */
-
+//Display previously-saved stored results on startup 
 initialize();
-
 function initialize() {
   var gettingAllStorageItems = browser.storage.local.get(null);
   gettingAllStorageItems.then((results) => {
@@ -33,8 +31,8 @@ function initialize() {
   }, onError);
 }
 
-/* Add a note to the display, and storage */
-
+//Perform translation, store and display result
+//Perform translation by using API and getting back JSON file that consist results
 function translate() {
   var input_t = input.value;
   if(input_t !== '') {
@@ -50,8 +48,7 @@ function translate() {
   }
 }
 
-/* function to store a new note in storage */
-
+//Function to store results into storage 
 function storeTranslate(input, translate) {
   var storing = browser.storage.local.set({ [input] : translate });
   storing.then(() => {
@@ -59,11 +56,10 @@ function storeTranslate(input, translate) {
   }, onError);
 }
 
-/* function to display a note in the note box */
-
+//Function to display the results in a container
 function displayTranslate(input, translate) {
 
-  /* create note display box */
+  //Initialize varialbe to create element for displaying the results
   var list = document.createElement('div');
   var listDisplay = document.createElement('div');
   var listH = document.createElement('h2');
@@ -87,8 +83,7 @@ function displayTranslate(input, translate) {
   list.appendChild(listDisplay);
   container.appendChild(list);
 
-  /* set up listener for the delete functionality */
-
+  //Set up listener for the delete functionality
   deleteBtn.addEventListener('click',(e) => {
     const evtTgt = e.target;
     evtTgt.parentNode.parentNode.parentNode.removeChild(evtTgt.parentNode.parentNode);
@@ -96,8 +91,7 @@ function displayTranslate(input, translate) {
   });
 }
 
-/* Clear all notes from the display/storage */
-
+//Clear all results from the display/storage
 function clearAll() {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
