@@ -6,7 +6,7 @@
 
   "description": "Allows the user to make quick translate by clicking a button and entering text into the resulting popup. The translate results are saved in storage.",
   "icons": {
-    "48": "icons/translate-48.png"
+    "48": "icons/translate.png"
   },
 
   "permissions": [
@@ -15,7 +15,7 @@
 
   "browser_action": {
     "default_icon": {
-     "32" : "icons/translate-32.png"
+     "48" : "icons/translate.png"
     },
     "default_title": "Translator",
     "default_popup": "translate.html"
